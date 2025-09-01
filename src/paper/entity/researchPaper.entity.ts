@@ -1,5 +1,12 @@
 import { User } from 'src/auth/entity/user.entity';
-import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class ResearchPaper {
@@ -9,13 +16,13 @@ export class ResearchPaper {
   @Column()
   title: string;
 
-  @Column('text', { array: true })
+  @Column({ type: 'jsonb', nullable: true })
   authors: string[];
 
   @Column()
   category: string;
 
-  @Column('text', { array: true })
+  @Column({ type: 'jsonb', nullable: true })
   keywords: string[];
 
   @Column('text', { nullable: true })

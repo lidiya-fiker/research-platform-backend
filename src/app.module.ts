@@ -7,15 +7,19 @@ import { AuthController } from './auth/controller/auth.controller';
 import { AuthService } from './auth/service/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { PaperModule } from './paper/paper.module';
+import { AiModule } from './ai/ai.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [],
       useFactory: () => dataSourceOptions,
     }),
     AuthModule,
-    PaperModule
+    PaperModule,
+    AiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,6 @@
+### Ask AI about a paper
+GET http://localhost:3000/ai/ask?paperId=446fe2a6-8ba7-4afe-af01-d8c511688c15&question=Explain%20the%20main%20idea%20of%20this%20paper
+Accept: application/json
+
+
+###

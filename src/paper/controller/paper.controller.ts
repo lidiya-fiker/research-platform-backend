@@ -4,18 +4,19 @@ import {
   Controller,
   Post,
   UploadedFile,
-  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { ExpressAdapter, FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { FILE_UPLOADS_DIR } from 'src/constants';
 import { acceptableFileFilter, fileNameEditor } from '../file.utils';
-import { request } from 'express';
 import { UploadPaperDto } from '../dto/uploadPaper.dto';
+import { PaperService } from '../service/paper.service';
 
 @Controller('paper')
 export class PaperController {
+  constructor(private readonly paperService: PaperService) {}
+
   @Post('upload')
   @UseInterceptors(
     FileInterceptor('file', {
@@ -39,9 +40,11 @@ export class PaperController {
       throw new BadRequestException('No file uploaded');
     }
 
+    const paper = await this.paperService.create(file, dto);
+
     return {
-      filename: file.filename,
-      size: file.size,
+      message: 'Paper uploaded successfully',
+      paper,
     };
   }
 }
