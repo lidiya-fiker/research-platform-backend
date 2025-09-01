@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { DataSourceOptions } from 'typeorm';
 import { User } from './auth/entity/user.entity';
+import { ResearchPaper } from './paper/entity/researchPaper.entity';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -11,5 +12,5 @@ export const dataSourceOptions: DataSourceOptions = {
   database: process.env.DB_NAME || 'researchPlatform',
   synchronize: true,
   logging: true,
-  entities: [User],
+  entities: [User, ResearchPaper],
 };

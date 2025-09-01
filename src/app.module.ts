@@ -6,6 +6,7 @@ import { dataSourceOptions } from './data-source';
 import { AuthController } from './auth/controller/auth.controller';
 import { AuthService } from './auth/service/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { PaperModule } from './paper/paper.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
       useFactory: () => dataSourceOptions,
     }),
     AuthModule,
+    PaperModule
   ],
   controllers: [AppController],
   providers: [AppService],
