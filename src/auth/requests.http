@@ -7,3 +7,19 @@ Content-Type: application/json
     "email":"lidiya@gmail.com",
     "password":"lidiya"
 }
+
+### user login
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email":"lidiya@gmail.com",
+    "password":"lidiya"
+}
+
+
+
+###get user profile
+GET http://localhost:3000/user/profile
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjoiYzM2MmFhZTMtYWM1Ny00NjJkLWExM2ItNDcwOTE5NmNjODZjIiwiZW1haWwiOiJsaWRpeWFAZ21haWwuY29tIn0sImlhdCI6MTc1NjcxMTE3MSwiZXhwIjoxNzU2NzEyOTcxfQ.WY_oZjtP0-j5gxmzm67fZ7iVrPyiht87nlR2qC-rACA

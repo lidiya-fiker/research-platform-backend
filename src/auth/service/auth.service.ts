@@ -1,9 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
-import { Auth, Repository } from 'typeorm';
-import { promises } from 'dns';
-import { SignUpDto } from '../dto/auth.dto';
+import { Repository } from 'typeorm';
+import { LoginDto, LoginResponseDto, SignUpDto } from '../dto/auth.dto';
 
 import { AuthHelper } from '../helper/auth.helper';
 
@@ -34,5 +33,32 @@ export class AuthService {
       password: hashedPassword,
     });
     return await this.userRepository.save(newUser);
+  }
+
+  async login(loginDto: LoginDto) {
+    const { email, password } = loginDto;
+
+    const user = await this.userRepository.findOne({
+      where: { email },
+    });
+
+    if (
+      !user ||
+      !(await this.helper.comparePassword(password, user.password))
+    ) {
+      throw new BadRequestException(' Invalid email or password');
+    }
+
+    const payload = {
+      id: user.id,
+      email: user.email,
+    };
+
+    const token: LoginResponseDto = {
+      access_token: await this.helper.generateAccessToken(payload),
+      refresh_token: await this.helper.generateAccessToken(payload),
+    };
+
+    return token;
   }
 }
