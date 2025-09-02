@@ -7,7 +7,7 @@ import OpenAI from 'openai';
 
 @Injectable()
 export class AiService {
-  private openai: OpenAI;
+  private readonly openai: OpenAI;
 
   constructor(
     private configService: ConfigService,
@@ -32,7 +32,7 @@ export class AiService {
     `;
 
     const response = await this.openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: prompt }],
     });
 
